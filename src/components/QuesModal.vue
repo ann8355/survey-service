@@ -2,8 +2,8 @@
  <Modal :ref="'createQues'" :title="title" :name="'createQues'" @confirm="onConfirm">
       <div class="modal-body">
         <Input :label="'題目標題'" class="gap" :txtLimited="20" @value="getName"/>
-        <Dropdown :label="'選擇題型'" class="gap" :defaults="1" :options="type" @input="changeType">
-        </Dropdown>
+        <Dropdown :label="'選擇題型'" class="gap" :defaults="defaults" :options="type"
+        @input="changeType"></Dropdown>
         <SwitchOpt :label="'是否必選'" class="gap" :options="switchOption" @switchVal="getVal"/>
         <Numselector :label="'評分級數'" class="gap" :max="10" @value="getNum" />
         <OptionSelector v-if="showSelector" :label="'選項內容'" class="gap" @change="getOptions" />
@@ -50,6 +50,7 @@ export default {
         right: '否',
       },
       showSelector: false,
+      defaults: 1,
     };
   },
   props: {
@@ -90,6 +91,9 @@ export default {
     getOptions(val) {
       this.info.options = val;
     },
+  },
+  mounted() {
+    this.info.type = this.defaults;
   },
 };
 </script>

@@ -1,8 +1,10 @@
 <template>
 <div id="app" ontouchstart>
   <LeftSide />
-  <Header />
-  <router-view />
+  <section class="rightBlock">
+    <Header />
+    <router-view />
+  </section>
 </div>
 </template>
 
@@ -22,4 +24,7 @@ export default {
 <style lang="scss">
 @import '~@/assets/css/base';
 
+.rightBlock {
+  margin-left: 25%;
+}
 </style>

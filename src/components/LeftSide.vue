@@ -2,7 +2,7 @@
   <nav class="leftside-wrap">
     <div class="top">
       <i :style="{backgroundImage: img}"></i>
-      <span>問券系統</span>
+      <span>問卷系統</span>
     </div>
     <ul class="menu">
       <li @click="display()" :class="['menu-list',{active: active1}]">
@@ -10,9 +10,11 @@
           <i></i>
           <span>問卷總覽</span>
         </router-link>
-        <ul v-show="isShow">
-          <li>測試</li>
-          <li>測試</li>
+        <ul v-show="items.length !== 0">
+          <li v-for="(item,idx) in items" :key="idx" @click="link()">
+            <!-- <router-link to="/">{{ item }}</router-link> -->
+            {{ item }}
+          </li>
         </ul>
       </li>
       <li :class="['menu-list',{active: active2}]" @click="openModal()">
@@ -20,17 +22,34 @@
         <span>建立問卷</span>
       </li>
     </ul>
+    <Modal :ref="'createModal'" :title="'新增問卷'" :name="'createModal'" :btnComfirm="'下一步'"
+    @confirm="onConfirm">
+      <div class="modal-body">
+        <Input :label="'問卷名稱'" class="gap" :txtLimited="12" @value="getName"/>
+      </div>
+    </Modal>
+    <QuesModal :ref="'createQues'" :title="'Q1'" @confirm="confirmQes" />
   </nav>
 </template>
 
 <script>
+import Modal from '@/components/ConfirmModal';
+import Input from '@/components/Input';
+import QuesModal from '@/components/QuesModal';
+
 export default {
   name: 'LeftSide',
+  components: {
+    Modal,
+    Input,
+    QuesModal,
+  },
   data() {
     return {
-      isShow: false,
       active1: false,
       active2: false,
+      surveryName: '',
+      items: [],
     };
   },
   computed: {
@@ -40,14 +59,40 @@ export default {
   },
   methods: {
     display() {
-      this.isShow = !this.isShow;
       this.active1 = true;
       this.active2 = false;
     },
     openModal() {
-      this.isShow = !this.isShow;
       this.active1 = false;
       this.active2 = true;
+      this.$refs.createModal.show();
+    },
+    getName(val) {
+      this.surveryName = val;
+    },
+    onConfirm() {
+      if (this.surveryName !== '' && this.surveryName !== undefined) {
+        this.$refs.createModal.close();
+        this.$refs.createQues.show(Date.now());
+      }
+    },
+    confirmQes(val) {
+      if (val.type === 1 || val.type === 4) {
+        if (val.title !== '' && val.title !== undefined) {
+          this.pass();
+        }
+      } else if (val.type === 2 || val.type === 3) {
+        if (val.title !== '' && val.title !== undefined && val.options.indexOf('') === -1) {
+          this.pass();
+        }
+      }
+    },
+    pass() {
+      this.items.push(this.surveryName);
+      this.$refs.createQues.close();
+    },
+    link() {
+      this.$router.push(`/${this.surveryName}`);
     },
   },
 };
@@ -115,5 +160,8 @@ $gray: darken($white, 35%);
 }
 .active {
   color: $gray;
+}
+.gap {
+  margin: $h5;
 }
 </style>

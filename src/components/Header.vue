@@ -1,6 +1,6 @@
 <template>
   <div class="head">
-    問卷總覽
+    {{ $route.path === '/' ? '問卷總覽': $route.params.id }}
   </div>
 </template>
 
@@ -19,7 +19,6 @@ $color: #E0005A;
   color: $white;
   padding: $h5;
   height: 6vh;
-  margin-left: 25%;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.26);
   display: flex;
   align-items: center;
