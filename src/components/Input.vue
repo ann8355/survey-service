@@ -1,7 +1,7 @@
 <template>
  <div class="input">
   <span :class="{alert: alert}">{{ label }}</span>
-  <wpt-input :genre="type" @input="inputTxt" ref="field"></wpt-input>
+  <wpt-input :genre="type" @input="inputTxt" @blur="blur" ref="field"></wpt-input>
  </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       alert: true,
+      val: this.value,
     };
   },
   props: {
@@ -23,19 +24,31 @@ export default {
     txtLimited: {
       type: Number,
     },
+    value: {
+      type: [Number, String],
+    },
+  },
+  watch: {
+    value(val) {
+      this.$refs.field.$el.querySelector('input').value = val;
+    },
   },
   methods: {
     inputTxt() {
       if (this.txtLimited) {
         this.$refs.field.$el.querySelector('input').value = this.$refs.field.value.substr(0, this.txtLimited);
       }
-      const val = this.$refs.field.$el.querySelector('input').value;
-      this.$emit('value', val);
-      if (val !== undefined && val !== '') {
+      this.val = this.$refs.field.$el.querySelector('input').value;
+      this.$emit('value', this.val);
+      if (this.val !== undefined && this.val !== '') {
         this.alert = false;
       } else {
         this.alert = true;
       }
+    },
+    blur() {
+      this.val = this.$refs.field.$el.querySelector('input').value;
+      this.$emit('blur', this.val);
     },
   },
 };
