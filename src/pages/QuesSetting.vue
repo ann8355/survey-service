@@ -20,9 +20,8 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-    const time = new Date(id);
     const array = this.$store.getters.qes;
-    this.qes = array.find(ele => ele.qesId === time);
+    this.qes = array.find(ele => ele.qesId === Number(id));
   },
 };
 </script>

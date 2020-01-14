@@ -12,7 +12,7 @@
         </router-link>
         <ul v-show="items.length !== 0">
           <li v-for="(item,idx) in items" :key="idx">
-            <router-link :to="`/${item.qesId.getTime()}`">{{ item.qesName }}</router-link>
+            <router-link :to="`/${item.qesId}`">{{ item.qesName }}</router-link>
           </li>
         </ul>
       </li>
@@ -77,7 +77,7 @@ export default {
       }
     },
     confirmQes(val) {
-      const id = new Date();
+      const id = Date.now();
       const details = [];
       details.push(val);
       const newQes = {
@@ -86,7 +86,7 @@ export default {
         qesDetail: details,
       };
       this.$store.dispatch('addQes', newQes);
-      this.$router.push(`/${id.getTime()}`);
+      this.$router.push(`/${id}`);
       this.surveryName = '';
     },
   },
@@ -137,6 +137,7 @@ $gray: darken($white, 35%);
     };
     a {
       display: block;
+      width: 100%;
     }
     ul {
       margin-top: 14px;

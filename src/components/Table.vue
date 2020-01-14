@@ -8,15 +8,12 @@
         </thead>
         <slot name="content" :clicks="clicks"></slot>
     </table>
-    <Modal v-if="isShow" :ref="'delModal'" :title="'刪除確認'" :name="'delModal'"
-    @confirm="onConfirm" @close="cancel">
-      <p class="modal-content">確定要刪除此份問卷？</p>
-    </Modal>
+    <Modal :delId="delId" :ref="'deleteModal'" />
   </div>
 </template>
 
 <script>
-import Modal from '@/components/ConfirmModal';
+import Modal from '@/components/DeleteModal';
 
 export default {
   name: 'Table',
@@ -27,7 +24,6 @@ export default {
   },
   data() {
     return {
-      isShow: false,
       delId: '',
     };
   },
@@ -37,21 +33,11 @@ export default {
   methods: {
     clicks(name, item) {
       if (name === 'edit') {
-        this.$router.push(`/${item.getTime()}`);
+        this.$router.push(`/${item}`);
       } else if (name === 'delete') {
-        this.isShow = true;
         this.delId = item;
-        setTimeout(() => {
-          this.$refs.delModal.show();
-        }, 100);
+        this.$refs.deleteModal.show();
       }
-    },
-    onConfirm() {
-      this.$store.dispatch('delQes', this.delId);
-      this.cancel();
-    },
-    cancel() {
-      this.isShow = false;
     },
   },
 };
@@ -100,10 +86,5 @@ export default {
       }
     }
   }
-}
-.modal-content {
-  font-size: $h4;
-  margin: $h2;
-  text-align: center;
 }
 </style>

@@ -9,7 +9,7 @@
         <tr class="has-data" v-for="(item,index) in list" :key="index" v-else
         :style="{height: `${length}vh`}">
             <td style="width: 48%;">
-              <router-link :to="`/${item.qesId.getTime()}`">{{ item.qesName }}</router-link>
+              <router-link :to="`/${item.qesId}`">{{ item.qesName }}</router-link>
             </td>
             <td>{{ formatTime(item.qesId) }}</td>
             <td>
@@ -60,7 +60,7 @@ export default {
   methods: {
     formatTime(time) {
       // return Moment(time).format('YYYY-MM-DD hh:mm:ss');
-      return time.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+      return new Date(time).toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
     },
   },
 };
