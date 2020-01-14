@@ -1,4 +1,3 @@
-export const UPDATE_CURRENT = 'UPDATE_CURRENT';
-export const UPDATE_DISCOUNT = 'UPDATE_DISCOUNT';
-export const ADD_FREE = 'ADD_FREE';
-export const REMOVE_FREE = 'REMOVE_FREE';
+export const ADD_QES = 'ADD_QES';
+export const UPDATE_QES = 'UPDATE_QES';
+export const DEL_QES = 'DEL_QES';

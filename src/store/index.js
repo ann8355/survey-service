@@ -5,49 +5,36 @@ import * as types from './mutation-types';
 
 // Vuex State
 const state = {
-  current: {},
-  free: [],
-  discount: {},
+  qes: [],
 };
 
 // Vuex Getters
 const getters = {
-  current: state => state.current,
-  free: state => state.free,
-  discount: state => state.discount,
+  qes: state => state.qes,
 };
 
 // Vuex Mutations
 const mutations = {
-  [types.UPDATE_CURRENT](state, current) {
-    state.current = current;
+  [types.ADD_QES](state, qes) {
+    state.qes.push(qes);
   },
-  [types.UPDATE_DISCOUNT](state, discount) {
-    state.discount = discount;
-  },
-  [types.ADD_FREE](state, id) {
-    const index = _.indexOf(state.free, id);
-    if (index < 0) state.free.push(id);
-  },
-  [types.REMOVE_FREE](state, id) {
-    const index = _.indexOf(state.free, id);
-    state.free.splice(index, 1);
+  [types.DEL_QES](state, id) {
+    _.remove(state.qes, { // remove不會更新畫面dom
+      qesId: id,
+    });
+    state.qes.splice(0, 0);// 觸發響應式更新
   },
 };
 
 // Vuex Actions
 const actions = {
-  addFree({ commit }, id) {
-    commit(types.ADD_FREE, id);
+  addQes({ commit }, qes) {
+    // API
+    commit(types.ADD_QES, qes);
   },
-  removeFree({ commit }, id) {
-    commit(types.REMOVE_FREE, id);
-  },
-  setCurrent({ commit }, current) {
-    commit(types.UPDATE_CURRENT, current);
-  },
-  setDiscount({ commit }, discount) {
-    commit(types.UPDATE_DISCOUNT, discount || {});
+  delQes({ commit }, qes) {
+    // API
+    commit(types.DEL_QES, qes);
   },
 };
 
@@ -57,4 +44,5 @@ export default {
   mutations,
   actions,
   namespaced: true,
+  strict: true,
 };

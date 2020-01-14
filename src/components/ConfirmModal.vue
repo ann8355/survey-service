@@ -112,8 +112,5 @@ $alto: lighten( $primary, 90% );
     background-color: $alto;
     color: $dove;
   }
-  .btn {
-    padding: 0;
-  }
 }
 </style>

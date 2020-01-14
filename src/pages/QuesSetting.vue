@@ -10,12 +10,19 @@ export default {
   name: 'QuesSetting',
   data() {
     return {
+      qes: null,
     };
   },
   components: {
     // Table,
   },
   methods: {
+  },
+  mounted() {
+    const id = this.$route.params.id;
+    const time = new Date(id);
+    const array = this.$store.getters.qes;
+    this.qes = array.find(ele => ele.qesId === time);
   },
 };
 </script>

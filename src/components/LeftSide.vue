@@ -11,9 +11,8 @@
           <span>問卷總覽</span>
         </router-link>
         <ul v-show="items.length !== 0">
-          <li v-for="(item,idx) in items" :key="idx" @click="link()">
-            <!-- <router-link to="/">{{ item }}</router-link> -->
-            {{ item }}
+          <li v-for="(item,idx) in items" :key="idx">
+            <router-link :to="`/${item.qesId.getTime()}`">{{ item.qesName }}</router-link>
           </li>
         </ul>
       </li>
@@ -49,7 +48,7 @@ export default {
       active1: false,
       active2: false,
       surveryName: '',
-      items: [],
+      items: this.$store.getters.qes,
     };
   },
   computed: {
@@ -66,6 +65,7 @@ export default {
       this.active1 = false;
       this.active2 = true;
       this.$refs.createModal.show();
+      this.surveryName = '';
     },
     getName(val) {
       this.surveryName = val;
@@ -77,22 +77,17 @@ export default {
       }
     },
     confirmQes(val) {
-      if (val.type === 1 || val.type === 4) {
-        if (val.title !== '' && val.title !== undefined) {
-          this.pass();
-        }
-      } else if (val.type === 2 || val.type === 3) {
-        if (val.title !== '' && val.title !== undefined && val.options.indexOf('') === -1) {
-          this.pass();
-        }
-      }
-    },
-    pass() {
-      this.items.push(this.surveryName);
-      this.$refs.createQues.close();
-    },
-    link() {
-      this.$router.push(`/${this.surveryName}`);
+      const id = new Date();
+      const details = [];
+      details.push(val);
+      const newQes = {
+        qesId: id,
+        qesName: this.surveryName,
+        qesDetail: details,
+      };
+      this.$store.dispatch('addQes', newQes);
+      this.$router.push(`/${id.getTime()}`);
+      this.surveryName = '';
     },
   },
 };
@@ -113,6 +108,7 @@ $gray: darken($white, 35%);
   width: 25%;
   float: left;
   border-right: $gray 1px solid;
+  z-index: 10;
   .top {
     display: flex;
     font-size: $h1;

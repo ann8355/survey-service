@@ -6,7 +6,7 @@
         <i @click="add()">新增</i>
       </span>
     </div>
-    <ul v-if="optionContents.length !== 0">
+    <ul>
         <li v-for="(option,idx) in optionContents" :key="idx" @click="focus(idx)">
           <Input :label="`${idx+1}.`" :txtLimited="10" @blur="getName" :value="option" />
           <i @click="remove(idx)">刪除</i>
@@ -45,7 +45,9 @@ export default {
       this.optionContents.push('');
     },
     remove(idx) {
-      this.optionContents.splice(idx, 1);
+      if (idx !== 0) {
+        this.optionContents.splice(idx, 1);
+      }
     },
     getName(val) {
       this.optionContents[this.currentIdx] = val;
@@ -53,6 +55,9 @@ export default {
     focus(idx) {
       this.currentIdx = idx;
     },
+  },
+  mounted() {
+    this.add();
   },
 };
 </script>

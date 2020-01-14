@@ -5,7 +5,7 @@
         <Dropdown :label="'選擇題型'" class="gap" :defaults="defaults" :options="type"
         @input="changeType"></Dropdown>
         <SwitchOpt :label="'是否必選'" class="gap" :options="switchOption" @switchVal="getVal"/>
-        <Numselector :label="'評分級數'" class="gap" :max="10" @value="getNum" />
+        <Numselector v-if="showSwitch" :label="'評分級數'" class="gap" :max="10" @value="getNum" />
         <OptionSelector v-if="showSelector" :label="'選項內容'" class="gap" @change="getOptions" />
       </div>
   </Modal>
@@ -50,6 +50,7 @@ export default {
         right: '否',
       },
       showSelector: false,
+      showSwitch: false,
       defaults: 1,
     };
   },
@@ -61,15 +62,30 @@ export default {
   },
   methods: {
     onConfirm() {
-      this.$emit('confirm', this.info);
+      const val = this.info;
+      if (val.type === 1 || val.type === 4) {
+        if (val.title !== '' && val.title !== undefined) {
+          this.$emit('confirm', this.info);
+          this.close();
+        }
+      } else if (val.type === 2 || val.type === 3) {
+        if (val.title !== '' && val.title !== undefined && val.options.indexOf('') === -1) {
+          this.$emit('confirm', this.info);
+          this.close();
+        }
+      }
     },
     show(id) {
       this.$refs.createQues.show();
       this.info.id = id;
+      this.info.type = this.defaults;
+      this.info.level = 1;
+      this.info.required = true;
     },
     close() {
       this.$refs.createQues.close();
       this.info = {};
+      this.showSelector = false;
     },
     getName(val) {
       this.info.title = val;
@@ -81,6 +97,11 @@ export default {
       } else {
         this.showSelector = false;
       }
+      if (val === 4) {
+        this.showSwitch = true;
+      } else {
+        this.showSwitch = false;
+      }
     },
     getVal(val) {
       this.info.required = val;
@@ -91,9 +112,6 @@ export default {
     getOptions(val) {
       this.info.options = val;
     },
-  },
-  mounted() {
-    this.info.type = this.defaults;
   },
 };
 </script>
