@@ -1,11 +1,18 @@
 <template>
   <div class="head">
-    <span  class="name">
-      {{ $route.path === '/' ? '問卷總覽': qes.qesName }}
+    <span class="name" v-if="!isEdited">
+      {{ qesName }}
     </span>
+    <Input class="name" :txtLimited="12" :value="qesName" @blur="getName" v-else />
     <template v-if="$route.path !== '/'">
-      <i>編輯</i>
-      <i @click="del()">刪除</i>
+      <template v-if="!isEdited">
+        <i @click="update()">編輯</i>
+        <i @click="del()">刪除</i>
+      </template>
+      <template v-else>
+        <i @click="save()">儲存</i>
+        <i @click="cancel()">取消</i>
+      </template>
       <Modal :delId="qes.qesId" :ref="'deleteModal'" />
     </template>
   </div>
@@ -13,20 +20,40 @@
 
 <script>
 import Modal from '@/components/DeleteModal';
+import Input from '@/components/Input';
 
 export default {
   name: 'Header',
   components: {
     Modal,
+    Input,
   },
   data() {
     return {
       qes: {},
+      isEdited: false,
+      qesName: '問卷總覽',
+      newName: '',
     };
   },
   methods: {
     del() {
       this.$refs.deleteModal.show();
+      this.isEdited = false;
+    },
+    update() {
+      this.isEdited = true;
+    },
+    save() {
+      this.isEdited = false;
+      this.qes.qesName = this.newName;
+      // this.$store.dispatch('updateQes', item);
+    },
+    cancel() {
+      this.isEdited = false;
+    },
+    getName(val) {
+      this.newName = val;
     },
   },
   updated() {
@@ -34,6 +61,11 @@ export default {
     const route = this.$route.params;
     if (route && route.id) {
       this.qes = array.find(ele => ele.qesId === Number(route.id));
+    }
+    if (this.$route.path !== '/') {
+      this.qesName = this.qes.qesName;
+    } else {
+      this.qesName = '問卷總覽';
     }
   },
 };
@@ -57,6 +89,12 @@ $color: #E0005A;
   }
   i {
     cursor: pointer;
+  }
+  & /deep/ .input .wpt-input {
+    width: 100%;
+    input {
+      color: $white;
+    }
   }
 }
 </style>

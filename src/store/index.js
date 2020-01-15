@@ -37,6 +37,10 @@ const mutations = {
     const searchQes = state.qes.find(ele => ele.qesId === item.qes);
     searchQes.qesDetail.splice(item.idx, 1, item.detail);
   },
+  [types.UPDATE_QES](state, item) {
+    const searchIdx = state.qes.findIndex(ele => ele.qesId === item.qesId);
+    state.qes.splice(searchIdx, 1, item);
+  },
 };
 
 // Vuex Actions
@@ -60,6 +64,10 @@ const actions = {
   updateQesDetail({ commit }, qes) {
     // API
     commit(types.UPDATE_QES_DETAIL, qes);
+  },
+  updateQes({ commit }, qes) {
+    // API
+    commit(types.UPDATE_QES, qes);
   },
 };
 
