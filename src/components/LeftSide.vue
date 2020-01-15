@@ -73,7 +73,14 @@ export default {
     onConfirm() {
       if (this.surveryName !== '' && this.surveryName !== undefined) {
         this.$refs.createModal.close();
-        this.$refs.createQues.show(Date.now());
+        const defaultInfo = {
+          id: Date.now(),
+          type: 1,
+          level: 1,
+          required: true,
+          title: '',
+        };
+        this.$refs.createQues.show(defaultInfo);
       }
     },
     confirmQes(val) {

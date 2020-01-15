@@ -8,8 +8,8 @@
           <Input v-if="item.type === 1" />
         </div>
         <div class="btnBlock">
-          <i>新增</i>
-          <i>編輯</i>
+          <i @click="create(idx)">新增</i>
+          <i @click="update(idx)">編輯</i>
           <i @click="del(item.id)">刪除</i>
         </div>
       </li>
@@ -18,23 +18,29 @@
     @confirm="onConfirm">
       <p class="modal-content">確定要刪除此問題？</p>
     </Modal>
+    <QuesModal :ref="'updateQues'" :title="`Q${action === 'create' ? selectIndex + 2 :
+    selectIndex + 1}`" @confirm="confirmQes" />
 </div>
 </template>
 
 <script>
 import Input from '@/components/Input';
 import Modal from '@/components/ConfirmModal';
+import QuesModal from '@/components/QuesModal';
 
 export default {
   name: 'Questionnaire',
   data() {
     return {
       selectId: '',
+      selectIndex: '',
+      action: '',
     };
   },
   components: {
     Input,
     Modal,
+    QuesModal,
   },
   props: {
     qesList: {
@@ -62,6 +68,44 @@ export default {
       this.selectId = id;
       this.$refs.delqesModal.show();
     },
+    create(val) {
+      this.action = 'create';
+      this.selectIndex = val;
+      const defaultInfo = {
+        id: Date.now(),
+        type: 1,
+        level: 1,
+        required: true,
+        title: '',
+      };
+      this.$refs.updateQues.show(defaultInfo);
+    },
+    update(val) {
+      this.action = 'update';
+      this.selectIndex = val;
+      const selectItem = this.qesList[val];
+      const defaultInfo = {
+        id: selectItem.id,
+        type: selectItem.type,
+        level: selectItem.level,
+        required: selectItem.required,
+        title: selectItem.title,
+        options: selectItem.options,
+      };
+      this.$refs.updateQues.show(defaultInfo);
+    },
+    confirmQes(val) {
+      const item = {
+        qes: this.qesId,
+        detail: val,
+        idx: this.selectIndex,
+      };
+      if (this.action === 'create') {
+        this.$store.dispatch('addQesDetail', item);
+      } else {
+        this.$store.dispatch('updateQesDetail', item);
+      }
+    },
   },
 };
 </script>
@@ -75,7 +119,7 @@ export default {
   color: lighten( $primary, 10% );
   border: 1px solid lighten( $primary, 80% );
   border-radius: $h6;
-  padding: 4% 6%;
+  padding: 2% 6%;
   box-sizing: border-box;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   background-color: darken( $white, 2% );
@@ -84,6 +128,7 @@ export default {
     li {
       display: flex;
       align-items: center;
+      margin: 22px 0;
       .order {
         margin-right: $h5;
       }

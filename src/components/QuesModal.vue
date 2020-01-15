@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      info: {},
+      info: this.defaultInfo,
       type: [{
         value: 1,
         name: '文字',
@@ -75,12 +75,9 @@ export default {
         }
       }
     },
-    show(id) {
+    show(info) {
       this.$refs.createQues.show();
-      this.info.id = id;
-      this.info.type = this.defaults;
-      this.info.level = 1;
-      this.info.required = true;
+      this.info = info;
     },
     close() {
       this.$refs.createQues.close();
