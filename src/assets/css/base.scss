@@ -24,3 +24,9 @@ a {
   border-radius: 0.8vh;
   line-height: 0;
 }
+.modal-content {
+  color: lighten( $primary, 30% );
+  font-size: $h4;
+  margin: $h2;
+  text-align: center;
+}

@@ -22,8 +22,8 @@ export default {
   name: 'OptionSelector',
   data() {
     return {
-      optionContents: [],
-      currentIdx: 0,
+      optionContents: JSON.parse(JSON.stringify(this.value)),
+      currentIdx: '',
     };
   },
   components: {
@@ -33,6 +33,9 @@ export default {
     label: {
       type: String,
       required: true,
+    },
+    value: {
+      type: Array,
     },
   },
   watch: {
@@ -45,19 +48,22 @@ export default {
       this.optionContents.push('');
     },
     remove(idx) {
-      if (idx !== 0) {
+      if (this.currentIdx !== 0) {
         this.optionContents.splice(idx, 1);
       }
     },
     getName(val) {
       this.optionContents[this.currentIdx] = val;
+      this.$emit('change', this.optionContents);
     },
     focus(idx) {
       this.currentIdx = idx;
     },
   },
   mounted() {
-    this.add();
+    if (this.value.length === 0) {
+      this.add();
+    }
   },
 };
 </script>

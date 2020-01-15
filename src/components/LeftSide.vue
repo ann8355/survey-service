@@ -79,6 +79,7 @@ export default {
           level: 1,
           required: true,
           title: '',
+          options: [],
         };
         this.$refs.createQues.show(defaultInfo);
       }

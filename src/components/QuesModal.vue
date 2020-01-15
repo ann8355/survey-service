@@ -1,12 +1,15 @@
 <template>
- <Modal :ref="'createQues'" :title="title" :name="'createQues'" @confirm="onConfirm">
+ <Modal v-if="showModal" :ref="'createQues'" :title="title" :name="'createQues'"
+ @confirm="onConfirm" @close="close">
       <div class="modal-body">
-        <Input :label="'題目標題'" class="gap" :txtLimited="50" @value="getName"/>
-        <Dropdown :label="'選擇題型'" class="gap" :defaults="defaults" :options="type"
+        <Input :label="'題目標題'" :value="info.title" class="gap" :txtLimited="50" @value="getName"/>
+        <Dropdown :label="'選擇題型'" class="gap" :defaults="info.type" :options="type"
         @input="changeType"></Dropdown>
-        <SwitchOpt :label="'是否必選'" class="gap" :options="switchOption" @switchVal="getVal"/>
+        <SwitchOpt class="gap" :label="'是否必選'" :val="info.required" :options="switchOption"
+        @switchVal="getVal"/>
         <Numselector v-if="showSwitch" :label="'評分級數'" class="gap" :max="10" @value="getNum" />
-        <OptionSelector v-if="showSelector" :label="'選項內容'" class="gap" @change="getOptions" />
+        <OptionSelector v-if="showSelector" :label="'選項內容'" :value="info.options" class="gap"
+        @change="getOptions" />
       </div>
   </Modal>
 </template>
@@ -31,7 +34,7 @@ export default {
   },
   data() {
     return {
-      info: this.defaultInfo,
+      info: {},
       type: [{
         value: 1,
         name: '文字',
@@ -51,7 +54,7 @@ export default {
       },
       showSelector: false,
       showSwitch: false,
-      defaults: 1,
+      showModal: false,
     };
   },
   props: {
@@ -67,20 +70,28 @@ export default {
         if (val.title !== '' && val.title !== undefined) {
           this.$emit('confirm', this.info);
           this.close();
+          this.$refs.createQues.close();
         }
       } else if (val.type === 2 || val.type === 3) {
         if (val.title !== '' && val.title !== undefined && val.options.indexOf('') === -1) {
           this.$emit('confirm', this.info);
           this.close();
+          this.$refs.createQues.close();
         }
       }
     },
     show(info) {
-      this.$refs.createQues.show();
+      this.showModal = true;
+      setTimeout(() => {
+        this.$refs.createQues.show();
+      }, 100);
       this.info = info;
+      if (this.info.type === 2 || this.info.type === 3) {
+        this.showSelector = true;
+      }
     },
     close() {
-      this.$refs.createQues.close();
+      this.showModal = false;
       this.info = {};
       this.showSelector = false;
     },

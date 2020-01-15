@@ -1,7 +1,7 @@
 <template>
  <div class="input">
   <span :class="{alert: alert}">{{ label }}</span>
-  <wpt-input :genre="type" @input="inputTxt" @blur="blur" ref="field"></wpt-input>
+  <wpt-input :genre="type" @input="inputTxt" @blur="blur" @focus="focus" ref="field"></wpt-input>
  </div>
 </template>
 
@@ -50,6 +50,15 @@ export default {
       this.val = this.$refs.field.$el.querySelector('input').value;
       this.$emit('blur', this.val);
     },
+    focus() {
+      this.val = this.$refs.field.$el.querySelector('input').value;
+      this.$emit('focus', this.val);
+    },
+  },
+  mounted() {
+    if (this.val) {
+      this.$refs.field.$el.querySelector('input').value = this.val;
+    }
   },
 };
 </script>

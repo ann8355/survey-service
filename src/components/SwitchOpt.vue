@@ -23,12 +23,15 @@ export default {
       type: Object,
       required: true,
     },
+    val: {
+      type: Boolean,
+    },
   },
   data() {
     return {
       right: false,
       left: true,
-      value: true,
+      value: this.val,
     };
   },
   methods: {
