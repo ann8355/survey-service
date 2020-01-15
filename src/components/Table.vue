@@ -76,7 +76,7 @@ export default {
         color: lighten( $primary, 30% );
         border-right: 1px solid lighten( $primary, 90% );
         border-top: 1px solid lighten( $primary, 90% );
-        background-color: darken( $white, 1% );
+        background-color: darken( $white, 2% );
       }
       &:last-child td:first-child {
         border-bottom-left-radius: 20px;

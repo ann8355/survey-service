@@ -24,6 +24,11 @@ const mutations = {
     });
     state.qes.splice(0, 0);// 觸發響應式更新
   },
+  [types.DEL_QES_DETAIL](state, item) {
+    const searchQes = state.qes.find(ele => ele.qesId === item.qes);
+    const index = searchQes.qesDetail.findIndex(ele => ele.id === item.detail);
+    searchQes.qesDetail.splice(index, 1);
+  },
 };
 
 // Vuex Actions
@@ -35,6 +40,10 @@ const actions = {
   delQes({ commit }, qes) {
     // API
     commit(types.DEL_QES, qes);
+  },
+  delQesDetail({ commit }, qes) {
+    // API
+    commit(types.DEL_QES_DETAIL, qes);
   },
 };
 

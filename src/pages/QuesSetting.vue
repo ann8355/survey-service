@@ -1,20 +1,21 @@
 <template>
   <div class="content">
+    <Questionnaire :qesList="qes.qesDetail" :qesId="qes.qesId" />
   </div>
 </template>
 
 <script>
-// import Table from '@/components/Table';
+import Questionnaire from '@/components/Questionnaire';
 
 export default {
   name: 'QuesSetting',
   data() {
     return {
-      qes: null,
+      qes: {},
     };
   },
   components: {
-    // Table,
+    Questionnaire,
   },
   methods: {
   },
@@ -33,6 +34,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  margin: 6vh 8%;
 }
 </style>

@@ -44,13 +44,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "~@/assets/css/base";
-
-.modal-content {
-  color: lighten( $primary, 30% );
-  font-size: $h4;
-  margin: $h2;
-  text-align: center;
-}
-</style>

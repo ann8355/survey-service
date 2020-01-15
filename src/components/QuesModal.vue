@@ -1,7 +1,7 @@
 <template>
  <Modal :ref="'createQues'" :title="title" :name="'createQues'" @confirm="onConfirm">
       <div class="modal-body">
-        <Input :label="'題目標題'" class="gap" :txtLimited="20" @value="getName"/>
+        <Input :label="'題目標題'" class="gap" :txtLimited="50" @value="getName"/>
         <Dropdown :label="'選擇題型'" class="gap" :defaults="defaults" :options="type"
         @input="changeType"></Dropdown>
         <SwitchOpt :label="'是否必選'" class="gap" :options="switchOption" @switchVal="getVal"/>
