@@ -7,7 +7,8 @@
         @input="changeType"></Dropdown>
         <SwitchOpt class="gap" :label="'是否必選'" :val="info.required" :options="switchOption"
         @switchVal="getVal"/>
-        <Numselector v-if="showSwitch" :label="'評分級數'" class="gap" :max="10" @value="getNum" />
+        <Numselector :value="info.level" v-if="showSwitch" :label="'評分級數'" class="gap" :max="10"
+         @value="getNum" />
         <OptionSelector v-if="showSelector" :label="'選項內容'" :value="info.options" class="gap"
         @change="getOptions" />
       </div>
@@ -89,11 +90,15 @@ export default {
       if (this.info.type === 2 || this.info.type === 3) {
         this.showSelector = true;
       }
+      if (this.info.type === 4) {
+        this.showSwitch = true;
+      }
     },
     close() {
       this.showModal = false;
       this.info = {};
       this.showSelector = false;
+      this.showSwitch = false;
     },
     getName(val) {
       this.info.title = val;

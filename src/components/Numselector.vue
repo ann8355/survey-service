@@ -10,7 +10,7 @@ export default {
   name: 'Numselector',
   data() {
     return {
-      num: 1,
+      num: this.value,
     };
   },
   props: {
@@ -19,6 +19,9 @@ export default {
       required: true,
     },
     max: {
+      type: Number,
+    },
+    value: {
       type: Number,
     },
   },
