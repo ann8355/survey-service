@@ -1,15 +1,15 @@
 @font-face {
-  font-family: 'YAKINIKU';
-  src:  url('~@/assets/fonts/YAKINIKU/YAKINIKU.eot?84ryol');
-  src:  url('~@/assets/fonts/YAKINIKU/YAKINIKU.eot?84ryol#iefix') format('embedded-opentype'),
-    url('~@/assets/fonts/YAKINIKU/YAKINIKU.woff2?84ryol') format('woff2'),
-    url('~@/assets/fonts/YAKINIKU/YAKINIKU.ttf?84ryol') format('truetype'),
-    url('~@/assets/fonts/YAKINIKU/YAKINIKU.woff?84ryol') format('woff'),
-    url('~@/assets/fonts/YAKINIKU/YAKINIKU.svg?84ryol#YAKINIKU') format('svg');
+  font-family: 'SURVEY';
+  src:  url('~@/assets/fonts/icomoon.eot?84ryol');
+  src:  url('~@/assets/fonts/icomoon.eot?84ryol#iefix') format('embedded-opentype'),
+    url('~@/assets/fonts/icomoon.woff2?84ryol') format('woff2'),
+    url('~@/assets/fonts/icomoon.ttf?84ryol') format('truetype'),
+    url('~@/assets/fonts/icomoon.woff?84ryol') format('woff'),
+    url('~@/assets/fonts/icomoon.svg?84ryol#SURVEY') format('svg');
 }
 
-i.yif {
-  font-family: 'YAKINIKU';
+.yif {
+  font-family: 'SURVEY';
   display: inline-block;
   letter-spacing: normal;
   word-wrap: normal;
@@ -23,63 +23,40 @@ i.yif {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-right: 0.3vw;
 }
 
 /* code */
-.yif-remove-o:before {
-  content: "\e15d";
+.icon-add-outline:before {
+  content: "\e900";
 }
-.yif-event-note:before {
-  content: "\e616";
+.icon-add-solid:before {
+  content: "\e901";
 }
-.yif-spoon-knife:before {
-  content: "\e904";
+.icon-checkmark-outline:before {
+  content: "\e902";
 }
-.yif-time:before {
-  content: "\e905";
+.icon-close-outline:before {
+  content: "\e903";
 }
-.yif-man:before {
+.icon-compose:before {
   content: "\e907";
 }
-.yif-suitcase:before {
+.icon-news-paper:before {
+  content: "\e909";
+}
+.icon-minus-solid:before {
   content: "\e908";
 }
-.yif-power-off:before {
-  content: "\e90b";
+.icon-minus-outline:before {
+  content: "\e905";
 }
-.yif-cog:before {
-  content: "\f013";
+.icon-star-full:before {
+  content: "\e90a";
 }
-.yif-inbox:before {
-  content: "\f01c";
+.icon-star-empty:before {
+  content: "\e9d7";
 }
-.yif-sync:before {
-  content: "\f021";
-}
-.yif-chevron-left:before {
-  content: "\f053";
-}
-.yif-chevron-right:before {
-  content: "\f054";
-}
-.yif-clipboard:before {
-  content: "\f0ea";
-}
-.yif-exchange:before {
-  content: "\f0ec";
-}
-.yif-dollar:before {
-  content: "\f155";
-}
-.yif-female:before {
-  content: "\f182";
-}
-.yif-male:before {
-  content: "\f183";
-}
-.yif-building:before {
-  content: "\f1ad";
-}
-.yif-seat:before {
-  content: "\e903";
+.icon-trash:before {
+  content: "\e906";
 }
