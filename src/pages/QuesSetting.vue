@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Questionnaire from '@/components/Questionnaire';
+import Questionnaire from '@/components/framesets/Questionnaire';
 
 export default {
   name: 'QuesSetting',

@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Modal from '@/components/DeleteModal';
-import Input from '@/components/Input';
+import Modal from '@/components/modal/DeleteModal';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'Header',

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Table from '@/components/Table';
+import Table from '@/components/framesets/Table';
 // import Moment from 'moment';
 
 export default {

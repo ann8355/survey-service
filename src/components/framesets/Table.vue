@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Modal from '@/components/DeleteModal';
+import Modal from '@/components/modal/DeleteModal';
 
 export default {
   name: 'Table',

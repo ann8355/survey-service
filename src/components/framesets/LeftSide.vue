@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import Modal from '@/components/ConfirmModal';
-import Input from '@/components/Input';
-import QuesModal from '@/components/QuesModal';
+import Modal from '@/components/modal/ConfirmModal';
+import Input from '@/components/form/Input';
+import QuesModal from '@/components/modal/QuesModal';
 
 export default {
   name: 'LeftSide',

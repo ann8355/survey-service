@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import Modal from '@/components/ConfirmModal';
-import Input from '@/components/Input';
-import Dropdown from '@/components/Dropdown';
-import SwitchOpt from '@/components/SwitchOpt';
-import Numselector from '@/components/Numselector';
-import OptionSelector from '@/components/OptionSelector';
+import Modal from '@/components/modal/ConfirmModal';
+import Input from '@/components/form/Input';
+import Dropdown from '@/components/form/Dropdown';
+import SwitchOpt from '@/components/form/SwitchOpt';
+import Numselector from '@/components/form/Numselector';
+import OptionSelector from '@/components/form/OptionSelector';
 
 export default {
   name: 'QuesModal',

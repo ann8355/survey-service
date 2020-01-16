@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Input from '@/components/Input';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'OptionSelector',

@@ -77,5 +77,5 @@ export default {
   mutations,
   actions,
   namespaced: true,
-  strict: true,
+  // strict: true,
 };

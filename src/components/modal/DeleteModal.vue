@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Modal from '@/components/ConfirmModal';
+import Modal from '@/components/modal/ConfirmModal';
 
 export default {
   name: 'DeleteModal',

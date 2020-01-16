@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import LeftSide from '@/components/LeftSide';
-import Header from '@/components/Header';
+import LeftSide from '@/components/framesets/LeftSide';
+import Header from '@/components/framesets/Header';
 
 export default {
   name: 'Root',

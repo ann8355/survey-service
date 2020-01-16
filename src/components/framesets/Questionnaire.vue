@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import Input from '@/components/Input';
-import Modal from '@/components/ConfirmModal';
-import QuesModal from '@/components/QuesModal';
-import StarSelector from '@/components/StarSelector';
+import Input from '@/components/form/Input';
+import Modal from '@/components/modal/ConfirmModal';
+import QuesModal from '@/components/modal/QuesModal';
+import StarSelector from '@/components/form/StarSelector';
 
 export default {
   name: 'Questionnaire',
