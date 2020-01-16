@@ -3,13 +3,13 @@
     <div class="add">
       <span>{{ label }}</span>
       <span class="addBtn">
-        <i @click="add()">新增</i>
+        <i class="yif icon-add-outline" @click="add()"></i>
       </span>
     </div>
     <ul>
         <li v-for="(option,idx) in optionContents" :key="idx" @click="focus(idx)">
           <Input :label="`${idx+1}.`" :txtLimited="10" @blur="getName" :value="option" />
-          <i @click="remove(idx)">刪除</i>
+          <i class="yif icon-minus-outline" @click="remove(idx)"></i>
         </li>
     </ul>
   </div>
@@ -98,7 +98,13 @@ ul > li{
     color: lighten( $primary, 30% );
     font-size: $h5;
     position: absolute;
-    right: 8%;
+    right: 7%;
+  }
+}
+i {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
   }
 }
 </style>

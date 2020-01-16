@@ -6,12 +6,12 @@
     <Input class="name" :txtLimited="12" :value="qesName" @blur="getName" v-else />
     <template v-if="$route.path !== '/'">
       <template v-if="!isEdited">
-        <i @click="update()">編輯</i>
-        <i @click="del()">刪除</i>
+        <i class="yif icon-compose" @click="update()"></i>
+        <i class="yif icon-trash" @click="del()"></i>
       </template>
       <template v-else>
-        <i @click="save()">儲存</i>
-        <i @click="cancel()">取消</i>
+        <i class="yif icon-checkmark-outline" @click="save()"></i>
+        <i class="yif icon-close-outline" @click="cancel()"></i>
       </template>
       <Modal :delId="qes.qesId" :ref="'deleteModal'" />
     </template>
@@ -89,6 +89,11 @@ $color: #E0005A;
   }
   i {
     cursor: pointer;
+    font-size: $h5;
+    color: darken( $white, 3% );
+    &:hover {
+      opacity: 0.7;
+    }
   }
   & /deep/ .input .wpt-input {
     width: 100%;

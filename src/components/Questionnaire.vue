@@ -17,12 +17,12 @@
               {{ opt }}
             </span>
           </div>
-          <!-- <div v-for="(opt,id) in item.options"  :key="id">{{ opt }}</div> -->
+          <StarSelector v-else />
         </div>
         <div class="btnBlock">
-          <i @click="create(idx)">新增</i>
-          <i @click="update(idx)">編輯</i>
-          <i @click="del(item.id)">刪除</i>
+          <i class="yif icon-add-solid" @click="create(idx)"></i>
+          <i class="yif icon-compose" @click="update(idx)"></i>
+          <i class="yif icon-minus-solid" @click="del(item.id)"></i>
         </div>
       </li>
     </ul>
@@ -39,6 +39,7 @@
 import Input from '@/components/Input';
 import Modal from '@/components/ConfirmModal';
 import QuesModal from '@/components/QuesModal';
+import StarSelector from '@/components/StarSelector';
 
 export default {
   name: 'Questionnaire',
@@ -53,6 +54,7 @@ export default {
     Input,
     Modal,
     QuesModal,
+    StarSelector,
   },
   props: {
     qesList: {
@@ -150,7 +152,8 @@ export default {
         &::before {
           content: '*';
           display: inline-block;
-          margin-left: -10px;
+          margin-left: -13px;
+          padding-right: 5px;
         }
       }
       .name {
@@ -169,9 +172,21 @@ export default {
         display: flex;
         justify-content: space-between;
         margin-left: 5%;
+        .icon-add-solid {
+          color: $red;
+        }
+        .icon-compose {
+          color: $neon-carrot;
+        }
+        .icon-minus-solid {
+          color: lighten( $primary, 77% );
+        }
       }
       i {
         cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }

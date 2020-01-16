@@ -78,8 +78,9 @@ export default {
 }
 .tableBtn {
   width: 45%;
-  font-size: $h4;
+  font-size: $h5;
   color: $white;
+  border-radius: 4px;
 }
 .yellow {
   background-color: $neon-carrot;

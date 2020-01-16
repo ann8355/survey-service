@@ -7,7 +7,7 @@
     <ul class="menu">
       <li @click="display()" :class="['menu-list',{active: active1}]">
         <router-link to="/">
-          <i></i>
+          <i class="yif icon-news-paper"></i>
           <span>問卷總覽</span>
         </router-link>
         <ul v-show="items.length !== 0">
@@ -17,7 +17,7 @@
         </ul>
       </li>
       <li :class="['menu-list',{active: active2}]" @click="openModal()">
-        <i></i>
+        <i class="yif icon-add-outline"></i>
         <span>建立問卷</span>
       </li>
     </ul>
@@ -138,7 +138,7 @@ $gray: darken($white, 35%);
   }
   .menu-list {
     border-bottom: $gray 1px solid;
-    padding: 1.6vw 1vw;
+    padding: 1.6vw 1.8vw;
     cursor: pointer;
     &:hover {
       background-color: lighten($color, 10%);
@@ -158,6 +158,10 @@ $gray: darken($white, 35%);
         color: $white;
         &:hover {
           text-decoration: underline;
+        }
+        &:before {
+          content: ">";
+          padding-right: 10px;
         }
       }
     }

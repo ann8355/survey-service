@@ -58,7 +58,7 @@ export default {
     color: $white;
     font-size: $h3;
     th {
-      padding: .75rem;
+      padding: $h3;
       &:first-child {
         border-top-left-radius: 20px;
       }
