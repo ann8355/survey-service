@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item,idx) in qesList" :key="idx">
         <div class="infoBlock">
-          <span class="order">{{ `${idx+1}.` }}</span>
+          <span :class="['order', {required: item.required}]">{{ `${idx+1}.` }}</span>
           <p class="name">{{ item.title }}</p>
           <Input v-if="item.type === 1" />
         </div>
@@ -132,6 +132,17 @@ export default {
       margin: 22px 0;
       .order {
         margin-right: $h5;
+        position: relative;
+      }
+      .required {
+        color: $red;
+        &::before {
+          content: '*';
+          display: block;
+          position: absolute;
+          right: $h3;
+          font-size: $h2;
+        }
       }
       .name {
         word-break: break-all;
