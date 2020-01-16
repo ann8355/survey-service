@@ -18,11 +18,22 @@ export default {
     Questionnaire,
   },
   methods: {
+    init() {
+      const id = this.$route.params.id;
+      const array = this.$store.getters.qes;
+      this.qes = array.find(ele => ele.qesId === Number(id));
+    },
   },
+  watch: {
+    $route() {
+      this.init();
+    },
+  },
+  // beforeRouteUpdate() {
+  //  this.init();
+  // },
   mounted() {
-    const id = this.$route.params.id;
-    const array = this.$store.getters.qes;
-    this.qes = array.find(ele => ele.qesId === Number(id));
+    this.init();
   },
 };
 </script>
