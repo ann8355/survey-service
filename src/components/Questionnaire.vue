@@ -6,6 +6,18 @@
           <span :class="['order', {required: item.required}]">{{ `${idx+1}.` }}</span>
           <p class="name">{{ item.title }}</p>
           <Input v-if="item.type === 1" />
+          <div class="gap" v-else-if="item.type === 2">
+            <span v-for="(opt,id) in item.options" :key="id">
+              <input type="radio" :name="item.id" :value="opt" :checked="id === 0">{{ opt }}
+            </span>
+          </div>
+          <div class="gap" v-else-if="item.type === 3">
+            <span v-for="(opt,id) in item.options" :key="id">
+              <input type="checkbox" :name="item.id" :value="opt" :checked="id === 0">
+              {{ opt }}
+            </span>
+          </div>
+          <!-- <div v-for="(opt,id) in item.options"  :key="id">{{ opt }}</div> -->
         </div>
         <div class="btnBlock">
           <i @click="create(idx)">新增</i>
@@ -132,16 +144,13 @@ export default {
       margin: 22px 0;
       .order {
         margin-right: $h5;
-        position: relative;
       }
       .required {
         color: $red;
         &::before {
           content: '*';
-          display: block;
-          position: absolute;
-          right: $h3;
-          font-size: $h2;
+          display: inline-block;
+          margin-left: -10px;
         }
       }
       .name {
@@ -165,6 +174,17 @@ export default {
         cursor: pointer;
       }
     }
+  }
+}
+.gap {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  span {
+    display: flex;
+    align-items: center;
+    font-size: $h5;
+    margin: 0 $h5 10px 0;
   }
 }
 </style>
