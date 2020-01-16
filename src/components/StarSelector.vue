@@ -1,8 +1,8 @@
 <template>
-  <div class="star">
-    <input class="starCheck" type="checkbox">
-    <label id="star" for="star" class="yif icon-star-empty"></label>
-  </div>
+  <span class="star">
+    <input class="starCheck" type="checkbox" :checked="checked">
+    <label id="star" for="star" class="yif icon-star-empty" @click="select()"></label>
+  </span>
 </template>
 
 <script>
@@ -10,18 +10,18 @@ export default {
   name: 'StarSelector',
   data() {
     return {
+      checked: false,
     };
   },
-  props: {
-  },
-  watch: {
+  methods: {
+    select() {
+      this.checked = !this.checked;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import '~@/assets/css/base';
-
 #star:hover::before, .starCheck:checked ~ #star::before{
   content:"\e90a";
   color: #F5A623;

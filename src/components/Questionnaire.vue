@@ -17,7 +17,9 @@
               {{ opt }}
             </span>
           </div>
-          <StarSelector v-else />
+          <div class="gap" v-else>
+            <StarSelector v-for="(val,id) in item.level" :key="id" />
+          </div>
         </div>
         <div class="btnBlock">
           <i class="yif icon-add-solid" @click="create(idx)"></i>
